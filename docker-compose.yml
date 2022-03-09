@@ -45,6 +45,7 @@ services:
             - laravel-9
     
     adminer:
+        container_name: adminer
         image: adminer
         ports:
         - 8080:8080
