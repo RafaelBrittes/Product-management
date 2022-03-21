@@ -36,7 +36,7 @@ Route::prefix('product')->group(function(){
     Route::put('/tags', [ProductController::class, 'updateProductTags']);
 });
 
-Route::middleware('auth:sanctum')->prefix('tag')->group(function(){
+Route::prefix('tag')->group(function(){
     Route::get('/', [TagController::class, 'showTags']);
     Route::post('/', [TagController::class, 'createTag']);
     Route::put('{id}', [TagController::class, 'updateTag']);
