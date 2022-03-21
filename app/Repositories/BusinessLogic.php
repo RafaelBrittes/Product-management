@@ -1,0 +1,49 @@
+<?php
+
+namespace App\Repositories;
+use Illuminate\Http\Request;
+use App\Traits\ApiResponser;
+
+abstract class BusinessLogic{
+    use ApiResponser;
+
+    protected $model;
+
+    public function __construct()
+    {
+        $this->model = $this->resolveModel();
+    }
+
+    protected function resolveModel(){
+        return app($this->model);
+    }
+
+    public function getAll(){
+        return $this->model->all();
+    }
+
+    public function create($request){
+        $newModel = new $this->model;
+        $newModel->create($request->all());
+
+        return $this->success([], "Created");
+    }
+
+    public function getByID($id){
+        return $this->model->where('id', $id)->get();
+    }
+
+    public function update($request){
+        $this->model->where('id', $request->id)->update($request->all());
+
+        return $this->success([], "ID {$request->id} updated");
+    }
+
+    public function delete($id){
+        $this->model->where('id', $id)->delete();
+
+        return $this->success([], "ID {$id} successfully deleted!");
+    }
+
+    
+}
