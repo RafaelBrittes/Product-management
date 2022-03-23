@@ -13,15 +13,15 @@ class TagController extends Controller
     }
 
     public function createTag(Request $request, TagRepository $repository){
-        $attr = $this->validateName($request->name);
+        $repository->validateName($request);
 
-        return $repository->create($attr);
+        return $repository->create($request);
     }
 
     public function updateTag(Request $request, TagRepository $repository){
-        $attr = $this->validateName($request->name);
+        $repository->validateName($request);
 
-        return $repository->update($attr);
+        return $repository->update($request);
     }
 
     public function showSpecificTag(Request $request, TagRepository $repository){
@@ -32,10 +32,4 @@ class TagController extends Controller
         return $repository->delete($request->id);
     }
 
-    public function validateName($name){
-        $attr = $name->validate([
-            'name' => 'required|string|max:60',
-        ]);
-        return $attr;
-    }
 }

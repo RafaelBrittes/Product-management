@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Repositories;
-use Illuminate\Http\Request;
+
 use App\Traits\ApiResponser;
 
 abstract class BusinessLogic{
@@ -26,7 +26,7 @@ abstract class BusinessLogic{
         $newModel = new $this->model;
         $newModel->create($request->all());
 
-        return $this->success([], "Created");
+        return $this->success("Created");
     }
 
     public function getByID($id){
@@ -36,14 +36,19 @@ abstract class BusinessLogic{
     public function update($request){
         $this->model->where('id', $request->id)->update($request->all());
 
-        return $this->success([], "ID {$request->id} updated");
+        return $this->success("ID {$request->id} updated");
     }
 
     public function delete($id){
         $this->model->where('id', $id)->delete();
 
-        return $this->success([], "ID {$id} successfully deleted!");
+        return $this->success("ID {$id} successfully deleted!");
     }
 
-    
+    public function validateName($name){
+        $attr = $name->validate([
+            'name' => 'required|string|max:60',
+        ]);
+        return $attr;
+    }    
 }

@@ -15,15 +15,23 @@ class ProductController extends Controller
     }
 
     public function createProduct(Request $request, ProductRepository $repository){
+        $repository->validateName($request);
+        
         return $repository->create($request);
     }
 
     public function updateProduct(Request $request, ProductRepository $repository){
+        $repository->validateName($request);
+
         return $repository->update($request);
     }
 
     public function showSpecificProduct(Request $request, ProductRepository $repository){
         return $repository->getByID($request->id);
+    }
+
+    public function showSpecificProductTags(Request $request, ProductRepository $repository){
+        return $repository->showSpecificProductTags($request);
     }
 
     public function deleteProduct(Request $request, ProductRepository $repository){
