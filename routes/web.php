@@ -26,7 +26,7 @@ Route::middleware('auth:sanctum')->prefix('user')->group(function(){
     Route::post('logout', [AuthController::class, 'logout']);
 });
 
-Route::prefix('product')->group(function(){
+Route::middleware('auth:sanctum')->prefix('product')->group(function(){
     Route::get('/', [ProductController::class, 'showProducts']);
     Route::post('/', [ProductController::class, 'createProduct']);
     Route::put('/', [ProductController::class, 'updateProduct']);
@@ -36,7 +36,7 @@ Route::prefix('product')->group(function(){
     Route::put('/tags', [ProductController::class, 'updateProductTags']);
 });
 
-Route::prefix('tag')->group(function(){
+Route::middleware('auth:sanctum')->prefix('tag')->group(function(){
     Route::get('/', [TagController::class, 'showTags']);
     Route::post('/', [TagController::class, 'createTag']);
     Route::put('{id}', [TagController::class, 'updateTag']);
