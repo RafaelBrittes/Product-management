@@ -30,8 +30,8 @@ Route::middleware('auth:sanctum')->prefix('product')->group(function(){
     Route::get('/', [ProductController::class, 'showProducts']);
     Route::post('/', [ProductController::class, 'createProduct']);
     Route::put('/', [ProductController::class, 'updateProduct']);
+    Route::get('/tags', [ProductController::class, 'showSpecificProductTags']);
     Route::get('{id}', [ProductController::class, 'showSpecificProduct']);
-    Route::get('tags/', [ProductController::class, 'showSpecificProductTags']);
     Route::delete('{id}', [ProductController::class, 'deleteProduct']);
     Route::put('/tags', [ProductController::class, 'updateProductTags']);
 });
