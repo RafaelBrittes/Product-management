@@ -24,9 +24,9 @@ abstract class BusinessLogic{
 
     public function create($request){
         $newModel = new $this->model;
-        $newModel->create($request->all());
+        $createdModel = $newModel->create($request->all());
 
-        return $this->success("Created");
+        return $this->success("Created", $createdModel);
     }
 
     public function getByID($id){
